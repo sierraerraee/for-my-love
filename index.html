@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Secret Page <3</title>
+	<style>
+		body {
+			background: linear-gradient(to bottom, #ffe4ec, #ffc1d6);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			font-family: Arial;
+		}
+
+		.container {
+			text-align: center;
+		}
+
+		h2 {
+			color: #ff4d88;
+		}
+
+		.display {
+			width: 200px;
+			height: 40px;
+			margin: 20px auto;
+			border-radius: 20px;
+			background: white;
+			line-height: 40px;
+			font-size: 20px;
+			letter-spacing: 5px;
+		}
+
+		.keypad {
+			display: grid;
+			grid-template-columns: repeat(3, 60px);
+			gap: 10px;
+			justify-content: center;
+		}
+
+		button {
+			height: 60px;
+			border: none;
+			border-radius:50%;
+			background: #ff85a2;
+			color: white;
+			font-size: 18px;
+			cursor: pointer;
+		}	
+
+		button:hover {
+			transform: scale(1.1);
+			background: #ff4d88;
+		}
+
+		#home {
+			display: none;
+			text-align: center;
+		}
+
+		.shake {
+			animation: shake 0.3s;
+		}
+
+		@keyframes shake {
+			0% { transform: translateX(0); }
+			25% { transform: translateX(-5px); }
+			50% { transform: translateX(5px); }
+			75% { transform: translateX(-5px); }
+			100% {transform:translateX(0); }
+		}
+	</style>
+</head>
+
+<body>
+
+<!-- Lock Screen-->
+<div id="lock" class="container">
+	<h2> Input the password</h2>
+
+	<div id="display" class="display"></div>
+
+	<div class="keypad">
+		<button onclick="input(1)">1</button>
+		<button onclick="input(2)">2</button>
+		<button onclick="input(3)">3</button>
+		<button onclick="input(4)">4</button>
+		<button onclick="input(5)">5</button>
+		<button onclick="input(6)">6</button>
+		<button onclick="input(7)">7</button>
+		<button onclick="input(8)">8</button>
+		<button onclick="input(9)">9</button>
+		<button onclick="clearPass()">C</button>
+		<button onclick="input(0)">0</button>
+		<button onclick="cek()">✔</button>
+	</div>
+
+	<div id="msg" class="msg"></div>
+</div>
+
+<!-- Home 🩷-->
+<div id="home">
+	<h1>Welcome babe🌷</h1>
+	<p>I just wanna say I love you so much🩷</p>
+</div>
+
+<script>
+	let password = "";
+
+	function input(num) {
+		if(password.length < 8) {
+			password += num;
+			document.getElementById("display").innerText = "*".repeat(password.length);
+		}
+	}
+
+	function clearPass () {
+		password = "";
+		document.getElementById("display").innerText = "";
+	}
+
+	function cek() {
+		if(password === "19092024") {
+			document.getElementById("lock").style.display = "none";
+			document.getElementById("home").style.display = "block";
+		} else {
+			let display = document.getElementById("display");
+			display.classList.add("shake");
+
+			setTimeout(() => {
+				display.classList.remove("shake");
+			}, 300);
+			
+			alert("wrong password");
+			password = "";
+			document.getElementById("display").innerText = "";
+		}
+	}
+</script>
+
+</body>
+</html>
